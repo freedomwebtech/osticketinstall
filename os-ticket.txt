@@ -1,0 +1,27 @@
+sudo yum install epel-release
+
+yum  -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+yum -y install php php-fpm php-mysqlnd php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-apcu php-intl php-opcache php-json php72-php-imap 
+
+
+yum install httpd mariadb mariadb-server wget unzip
+
+create database osticket;
+
+create user 'osticket'@'localhost' identified by 'password';
+
+grant all privileges on osticket.* to 'osticket'@'localhost';
+
+
+find / -name imap.so
+
+ln -s /opt/remi/php72/root/usr/lib64/php/modules/imap.so /usr/lib64/php/modules/imap.so
+ln -s /opt/remi/php72/root/usr/lib64/php/modules/imap.so /usr/lib64/php/modules/imap.so.so
+
+
+nano /etc/php.ini
+
+extension = imap.so
+
+sudo systemctl restart php-fpm
